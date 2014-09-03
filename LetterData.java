@@ -1,11 +1,12 @@
-
 public class LetterData {
 
 	public int id;
-	public int score;
+	public float score;
 	public int frequency;
 	
+	public LetterData(){
 	
+	}
 	
 	public LetterData(int id,int score,int frequency)
 	{
@@ -17,7 +18,7 @@ public class LetterData {
 	{
 		return this.id;
 	}
-	public int get_score()
+	public float get_score()
 	{
 		return this.score;
 	}
