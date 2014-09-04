@@ -1,0 +1,11 @@
+Enter file contents herepublic class GetScore{
+	int getScoreOfWord(String word){
+		int total=0;
+		for(int i=0; i<word.length(); i++){
+			 total += LetterManager.getScoreOfLetter(word.charAt(i));		
+	}
+		
+		return total;
+	}
+	
+}
