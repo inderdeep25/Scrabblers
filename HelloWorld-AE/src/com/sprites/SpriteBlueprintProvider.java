@@ -15,17 +15,21 @@ public class SpriteBlueprintProvider {
 
     private Map<String, SimpleSpriteBlueprint> _simpleSprites;
     private Map<String, TextSpriteBlueprint> _textSprites;
+    private Map<String, AnimatedSpriteBlueprint> _animatedSprites;
 
     private SpriteBlueprintProvider(){
         _simpleSprites = new HashMap<String, SimpleSpriteBlueprint>();
         _textSprites = new HashMap<String, TextSpriteBlueprint>();
+        _animatedSprites = new HashMap<String, AnimatedSpriteBlueprint>();
     }
 
-    public SimpleSpriteBlueprint GetSprite(String key){
+    public SimpleSpriteBlueprint GetSimpleSprite(String key){
         return _simpleSprites.get(key);
     }
 
     public TextSpriteBlueprint GetTextSprite(String key) {return _textSprites.get(key);}
+
+    public AnimatedSpriteBlueprint GetAnimatedSprite(String key) {return _animatedSprites.get(key);}
 
     public void AddSimpleSpriteBlueprint(String key, SimpleSpriteBlueprint sprite){
         if(!_simpleSprites.containsKey(key))
@@ -35,5 +39,10 @@ public class SpriteBlueprintProvider {
     public void AddTextSpriteBlueprint(String key, TextSpriteBlueprint sprite){
         if(!_textSprites.containsKey(key))
             _textSprites.put(key, sprite);
+    }
+
+    public void AddAnimatedSpriteBlueprint(String key, AnimatedSpriteBlueprint sprite){
+        if(!_animatedSprites.containsKey(key))
+            _animatedSprites.put(key, sprite);
     }
 }

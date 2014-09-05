@@ -5,14 +5,14 @@ import com.threed.jpct.Texture;
 
 import java.util.UUID;
 
-public class TextSpriteToken implements ISpriteToken {
+public class AnimatedSpriteToken implements ISpriteToken{
     private UUID _id;
     private int _layer;
 
     public UUID GetId()   {return _id;}
     public int GetLayer() {return _layer;}
 
-    public TextSpriteToken(TextSprite reference, int layer){
+    public AnimatedSpriteToken(AnimatedSprite reference, int layer){
         _id = reference.GetId();
         _layer = layer;
     }
@@ -25,8 +25,12 @@ public class TextSpriteToken implements ISpriteToken {
         SpriteManager.GetInstance().UpdateSpriteScale(scale, this);
     }
 
-    public void SetAtlasTexture(Texture texture){
-        SpriteManager.GetInstance().UpdateSpriteTexture(texture, this);
+    public void SwitchAnimation(int animationIndex){
+        SpriteManager.GetInstance().SwitchSpriteAnimation(animationIndex, this);
+    }
+
+    public void FireTemporaryAnimation(int animationIndex){
+        SpriteManager.GetInstance().FireTemporarySpriteAnimation(animationIndex, this);
     }
 
     public void Delete(){

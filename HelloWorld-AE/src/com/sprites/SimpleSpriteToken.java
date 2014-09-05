@@ -28,4 +28,8 @@ public class SimpleSpriteToken implements ISpriteToken{
     public void SetTexture(Texture texture){
         SpriteManager.GetInstance().UpdateSpriteTexture(texture, this);
     }
+
+    public void Delete(){
+        SpriteManager.GetInstance().DeleteSprite(this);
+    }
 }

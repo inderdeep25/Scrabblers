@@ -22,5 +22,11 @@ public interface ISprite {
     String GetMessage();
     void SetMessage(String value);
 
+    int GetAnimationIndex();
+    void SetAnimationIndex(int value);
+
+    void FireTemporaryAnimation(int animationIndex);
+
     void Draw(FrameBuffer fb);
+    void Update(float elapsedTime);
 }
