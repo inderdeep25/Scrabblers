@@ -47,7 +47,7 @@ public class HelloWorld extends Activity {
 	private GLSurfaceView mGLView;
 	private MyRenderer renderer = null;
 	private FrameBuffer fb = null;
-	private World world = null;
+//    private World world = null;
 	private RGBColor back = new RGBColor(50, 50, 100);
 	int[][] x=new int[5][5];
 	private float touchTurn = 0;
@@ -56,10 +56,10 @@ public class HelloWorld extends Activity {
 	private float xpos = -1;
 	private float ypos = -1;
 
-	private Object3D cube = null;
+	//private Object3D cube = null;
 	private int fps = 0;
 
-	private Light sun = null;
+	//private Light sun = null;
 
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -71,7 +71,7 @@ public class HelloWorld extends Activity {
 
 		super.onCreate(savedInstanceState);
 		mGLView = new GLSurfaceView(getApplication());
-
+		setContentView(R.layout.main);
 		mGLView.setEGLConfigChooser(new GLSurfaceView.EGLConfigChooser() {
 			public EGLConfig chooseConfig(EGL10 egl, EGLDisplay display) {
 				// Ensure that we get a 16bit framebuffer. Otherwise, we'll fall
@@ -118,7 +118,7 @@ public class HelloWorld extends Activity {
 			throw new RuntimeException(e);
 		}
 	}
-
+/*
 	public boolean onTouchEvent(MotionEvent me) {
 
 		if (me.getAction() == MotionEvent.ACTION_DOWN) {
@@ -155,7 +155,7 @@ public class HelloWorld extends Activity {
 
 		return super.onTouchEvent(me);
 	}
-
+*/
 	protected boolean isFullscreenOpaque() {
 		return true;
 	}
@@ -175,11 +175,11 @@ public class HelloWorld extends Activity {
 
 			if (master == null) {
 
-				world = new World();
-				world.setAmbientLight(20, 20, 20);
+//				world = new World();
+	//			world.setAmbientLight(0, 0, 0);
 
-				sun = new Light(world);
-				sun.setIntensity(250, 250, 250);
+		//		sun = new Light(world);
+			//	sun.setIntensity(250, 250, 250);
 				
 				/*Texture boardTileTexture=new Texture(getResources().openRawResource(R.raw.tile2),true);
 				boardTileTexture.setFiltering(false);
@@ -211,9 +211,9 @@ public class HelloWorld extends Activity {
 				//Texture texture = new Texture(BitmapHelper.rescale(BitmapHelper.convert(getResources().getDrawable(R.drawable.icon)), 64, 64));
 				Manager obj =new Manager();
 				
-				x=obj.createBoard(5);
-				for(int i=0;i<5;i++)
-					for(int j=0;j<5;j++){
+				x=obj.createBoard(9);
+				for(int i=0;i<9;i++)
+					for(int j=0;j<9;j++){
 						if(x[i][j]==0){
 							Log.d("x",Integer.toString(x[i][j]));
 							Texture boardAtlasTexture = new Texture(getResources().openRawResource(R.raw.tile2), true);
@@ -281,7 +281,7 @@ public class HelloWorld extends Activity {
 				TextureManager.getInstance().addTexture("texture", texture);
 				//SpriteBlueprintProvider.GetInstance().AddtTextSpriteBlueprint("Alphabet",
 				//								new TextSpriteBlueprint("text",texture,000,scale,char[] aplhabet,width));*/
-				
+				/*
 				cube = Primitives.getCube(10);
 				cube.calcTextureWrapSpherical();
 				cube.setTexture("alphabet_atlas");
@@ -293,12 +293,12 @@ public class HelloWorld extends Activity {
 				Camera cam = world.getCamera();
 				cam.moveCamera(Camera.CAMERA_MOVEOUT, 50);
 				cam.lookAt(cube.getTransformedCenter());
-
-				SimpleVector sv = new SimpleVector();
-				sv.set(cube.getTransformedCenter());
-				sv.y -= 100;
-				sv.z -= 100;
-				sun.setPosition(sv);
+*/
+				//SimpleVector sv = new SimpleVector();
+			//	sv.set(cube.getTransformedCenter());
+				//sv.y -= 100;
+			//	sv.z -= 100;
+		///		sun.setPosition(sv);
 				MemoryHelper.compact();
 
 				if (master == null) {
@@ -313,18 +313,18 @@ public class HelloWorld extends Activity {
 
 		public void onDrawFrame(GL10 gl) {
 			if (touchTurn != 0) {
-				cube.rotateY(touchTurn);
+			//	cube.rotateY(touchTurn);
 				touchTurn = 0;
 			}
 
 			if (touchTurnUp != 0) {
-				cube.rotateX(touchTurnUp);
+				//cube.rotateX(touchTurnUp);
 				touchTurnUp = 0;
 			}
 
 			fb.clear(back);
-			world.renderScene(fb);
-			world.draw(fb);
+			//world.renderScene(fb);
+			//world.draw(fb);
 			SpriteManager.GetInstance().Draw(fb);
 			fb.display();
 
