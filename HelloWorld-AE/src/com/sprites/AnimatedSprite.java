@@ -7,16 +7,19 @@ import com.threed.jpct.TextureManager;
 
 import java.util.UUID;
 
-public class AnimatedSprite implements ISprite {
+public class AnimatedSprite implements ISprite
+{
     private UUID _id;
     public UUID GetId() {return _id;}
     public void SetId(UUID value) {_id = value;}
 
     private SimpleVector _position;
-    public SimpleVector GetPosition(){
+    public SimpleVector GetPosition()
+    {
         return _position;
     }
-    public void SetPosition(SimpleVector value){
+    public void SetPosition(SimpleVector value)
+    {
         _position = value;
     }
 
@@ -37,7 +40,8 @@ public class AnimatedSprite implements ISprite {
     public int GetAnimationIndex(){return _animation.GetCurrentAnimation();}
     public void SetAnimationIndex(int animationIndex){_animation.SwitchAnimation(animationIndex);}
 
-    public void FireTemporaryAnimation(int animationIndex){
+    public void FireTemporaryAnimation(int animationIndex)
+    {
         _animation.FireTemporaryAnimation(animationIndex);
     }
 
