@@ -174,7 +174,7 @@ public class HelloWorld extends Activity {
 				 * TextureManager.getInstance().addTexture("board_tile_texture",
 				 * boardTileTexture);
 				 */
-				
+
 				Texture blankTileTexture = new Texture(getResources()
 						.openRawResource(R.raw.blank), true);
 				blankTileTexture.setFiltering(false);
@@ -210,7 +210,7 @@ public class HelloWorld extends Activity {
 						new TextSpriteBlueprint("1", "number_atlas",
 								new SimpleVector(0, 0, 0), 1.666f,
 								new char[] { '1' }, 8, 8));
-								
+
 				// TileAC ti = new TileAC(new
 				// SimpleVector(32*1.666f,120+32*1.666f,0),"A","1");
 
@@ -284,12 +284,12 @@ public class HelloWorld extends Activity {
 						2F);
 				TileGenerator.AddTileTypeFrequency(TileType.DOUBLE_WORD_TILE,
 						2F);
-				
+
 				TileGenerator.AddTileTypeFrequency(
 						TileType.TRIPPLE_LETTER_TILE, 2F);
 				TileGenerator.AddTileTypeFrequency(TileType.TRIPPLE_WORD_TILE,
 						2F);
-				//TileGenerator.AddTileTypeFrequency(TileType.CENTER_TILE, 1F);
+				// TileGenerator.AddTileTypeFrequency(TileType.CENTER_TILE, 1F);
 
 				// TileAC ob=new TileAC();
 
@@ -303,11 +303,11 @@ public class HelloWorld extends Activity {
 				BoardGenerator ob = new BoardGenerator(9);
 				Log.d("chl ja yar", "plzzz");
 				ob.generateBoard();
-				ob.setTile(new BoardCoordinates(2, 3));
-				ob.setTile(new BoardCoordinates(3, 3));
-				ob.setTile(new BoardCoordinates(4, 3));
-				ob.setTile(new BoardCoordinates(5, 3));
-				ob.setTile(new BoardCoordinates(6, 3));
+				// ob.setTile(new BoardCoordinates(2, 3));
+				// ob.setTile(new BoardCoordinates(3, 3));
+				// ob.setTile(new BoardCoordinates(4, 3));
+				// ob.setTile(new BoardCoordinates(5, 3));
+				// ob.setTile(new BoardCoordinates(6, 3));
 				// ob.generateBoard();
 
 				/*

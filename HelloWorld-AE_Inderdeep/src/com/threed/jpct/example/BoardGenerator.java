@@ -11,17 +11,17 @@ import com.threed.jpct.TextureManager;
 public class BoardGenerator {
 
 	public int sizeOfBoard;
-	public TileAC[][] board;
+	public Tile[][] board;
 	
 	public BoardGenerator() {
 
 		sizeOfBoard = 9;
-		board = new TileAC[sizeOfBoard][sizeOfBoard];
+		board = new Tile[sizeOfBoard][sizeOfBoard];
 	}
 
 	public BoardGenerator(int sizeOfBoard) {
 		this.sizeOfBoard = sizeOfBoard;
-		board = new TileAC[sizeOfBoard][sizeOfBoard];
+		board = new Tile[sizeOfBoard][sizeOfBoard];
 
 	}
 
@@ -31,7 +31,7 @@ public class BoardGenerator {
 			for (int j = 0; j < sizeOfBoard; j++) {
 
 				Log.d("In board:", "worked");
-				board[i][j] = new TileAC(new BoardCoordinates(i, j),
+				board[i][j] = new Tile(new BoardCoordinates(i, j),
 						TileGenerator.getRandomTileType());
 
 				board[i][j].setPixelPosition(new SimpleVector(
@@ -43,7 +43,7 @@ public class BoardGenerator {
 		}
 		int center = (sizeOfBoard - 1) / 2;
 		board[center][center].Delete();
-		board[center][center] = new TileAC(new BoardCoordinates((int) center,
+		board[center][center] = new Tile(new BoardCoordinates((int) center,
 				(int) center), TileType.CENTER_TILE);
 
 		board[center][center].setPixelPosition(new SimpleVector(
@@ -51,11 +51,4 @@ public class BoardGenerator {
 				120 + (((float) center) * 32 * 1.666f), 0));
 	}
 
-	public void setTile(BoardCoordinates loc) {
-		//board[loc.y-1][loc.x-1].Delete();
-		board[loc.y-1][loc.x-1]= new TileAC(new BoardCoordinates(loc.y, loc.x), TileType.LETTER_TILE);
-		
-		board[loc.y-1][loc.x-1].setPixelPosition(new SimpleVector((loc.y-1) * 32 * 1.666f,
-				120 + ((loc.x-1) * 32 * 1.666f), 0));
-	}
 }

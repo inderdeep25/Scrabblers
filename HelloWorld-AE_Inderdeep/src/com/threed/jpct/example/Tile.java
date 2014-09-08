@@ -7,7 +7,7 @@ import com.sprites.SpriteManager;
 import com.sprites.TextSpriteToken;
 import com.threed.jpct.SimpleVector;
 
-public class TileAC {
+public class Tile {
 	SimpleSpriteToken background;
 	TextSpriteToken letter;
 	TextSpriteToken number;
@@ -15,7 +15,7 @@ public class TileAC {
 
 	float scale = 10;
 
-	public TileAC(BoardCoordinates x, TileType tileType) {
+	public Tile(BoardCoordinates x, TileType tileType) {
 		// background =
 		// SpriteManager.GetInstance().AddSimpleSprite("blank_tile_blueprint",
 		// 0);
@@ -35,12 +35,17 @@ public class TileAC {
 
 	}
 
-	public void Delete(){
+	public void Delete() {
 		background.Delete();
 		letter.Delete();
 		number.Delete();
 	}
-	
+
+	public void placeLetter() {
+		// place background tile,tile points and letter.
+		//takes parameter of letter data.
+	}
+
 	public void setTileType(TileType tileType) {
 		if (background != null)
 			background.Delete();
@@ -55,11 +60,6 @@ public class TileAC {
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"blankTile_blueprint", 0);
 			Log.d("xy", "nullTile");
-			break;
-		case LETTER_TILE:
-			background = SpriteManager.GetInstance().AddSimpleSprite(
-					"blank_tile_blueprint", 1);
-			Log.d("xy", "LetterTile");
 			break;
 
 		case TRIPPLE_LETTER_TILE:
