@@ -29,11 +29,18 @@ public final class R {
     public static final class raw {
         public static final int alpha_a=0x7f040000;
         public static final int alphabet=0x7f040001;
-        public static final int blank=0x7f040002;
-        public static final int num1=0x7f040003;
-        public static final int tile=0x7f040004;
-        public static final int tile2=0x7f040005;
-        public static final int tray=0x7f040006;
+        public static final int alphabets=0x7f040002;
+        public static final int blank=0x7f040003;
+        public static final int blank_tile=0x7f040004;
+        public static final int center_tile=0x7f040005;
+        public static final int double_letter=0x7f040006;
+        public static final int double_word=0x7f040007;
+        public static final int num1=0x7f040008;
+        public static final int tile=0x7f040009;
+        public static final int tile2=0x7f04000a;
+        public static final int tray=0x7f04000b;
+        public static final int tripple_letter=0x7f04000c;
+        public static final int tripple_word=0x7f04000d;
     }
     public static final class string {
         public static final int app_name=0x7f050001;
