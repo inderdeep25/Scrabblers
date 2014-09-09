@@ -219,11 +219,11 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"blank_tile_blueprint",
 						new SimpleSpriteBlueprint("blank_tile_texture",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 				SpriteBlueprintProvider.GetInstance().AddTextSpriteBlueprint(
 						"alphabet_blueprint",
 						new TextSpriteBlueprint("A", "alphabet_atlas",
-								new SimpleVector(0, 0, 0), (float) 1.666f,
+								new SimpleVector(0, 0, 0), (float) 1.363f,
 								new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G',
 										'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 										'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
@@ -231,11 +231,11 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddTextSpriteBlueprint(
 						"number_blueprint",
 						new TextSpriteBlueprint("1", "number_atlas",
-								new SimpleVector(0, 0, 0), (float) 1.666f,
+								new SimpleVector(0, 0, 0), (float) 1.363f,
 								new char[] { '1' }, 8, 8));
 
 				// TileAC ti = new TileAC(new
-				// SimpleVector(32*1.666f,120+32*1.666f,0),"A","1");
+				// SimpleVector(32*1.363f,120+32*1.363f,0),"A","1");
 
 				Texture blankTile = new Texture(getResources().openRawResource(
 						R.raw.blank_tile), true);
@@ -275,32 +275,32 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"blankTile_blueprint",
 						new SimpleSpriteBlueprint("blankTile",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"doubleLetterTile_blueprint",
 						new SimpleSpriteBlueprint("doubleLetterTile",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"trippleLetterTile_blueprint",
 						new SimpleSpriteBlueprint("trippleLetterTile",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"doubleWordTile_blueprint",
 						new SimpleSpriteBlueprint("doubleWordTile",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"trippleWordTile_blueprint",
 						new SimpleSpriteBlueprint("trippleWordTile",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"centerTile_blueprint",
 						new SimpleSpriteBlueprint("centerTile",
-								new SimpleVector(0, 0, 0), (float) 1.666f));
+								new SimpleVector(0, 0, 0), (float) 1.363f));
 				Log.d("TILE", "NO ERROR");
 				TileGenerator.AddTileTypeFrequency(TileType.BLANK_TILE, 10F);
 				TileGenerator.AddTileTypeFrequency(TileType.DOUBLE_LETTER_TILE,
@@ -325,6 +325,7 @@ public class HelloWorld extends Activity {
 
 				Log.d("chl ja yar", "plzzz");
 				ob.generateBoard();
+				//ob.extendBoard();
 				// ob.setTile(new BoardCoordinates(2, 3));
 				// ob.setTile(new BoardCoordinates(3, 3));
 				// ob.setTile(new BoardCoordinates(4, 3));

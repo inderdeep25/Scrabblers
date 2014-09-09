@@ -103,11 +103,11 @@ public class Tile {
 
 	public void setPixelPosition(SimpleVector pos) {
 
-		SimpleVector letterdelta = new SimpleVector(3.0f * 1.666f,
-				3.0f * 1.666f, 0.0f);
+		SimpleVector letterdelta = new SimpleVector(3.0f * 1.363f,
+				3.0f * 1.363f, 0.0f);
 		// letterdelta.scalarMul(scale);
-		SimpleVector numberdelta = new SimpleVector(20.0f * 1.666f,
-				20.0f * 1.666f, 0.0f);
+		SimpleVector numberdelta = new SimpleVector(20.0f * 1.363f,
+				20.0f * 1.363f, 0.0f);
 		// numberdelta.scalarMul(scale);
 
 		background.SetPosition(pos);
