@@ -1,28 +1,32 @@
 package com.threed.jpct.example;
 
-import android.util.Log;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.sprites.SpriteBlueprintProvider;
-import com.sprites.TextSpriteBlueprint;
+import android.util.Log;
 import com.threed.jpct.SimpleVector;
-import com.threed.jpct.Texture;
-import com.threed.jpct.TextureManager;
 
 public class BoardGenerator {
 
 	public int sizeOfBoard;
-	public Tile[][] board;
-	
-	public BoardGenerator() {
-
-		sizeOfBoard = 9;
-		board = new Tile[sizeOfBoard][sizeOfBoard];
-	}
+	public static Tile[][] board;
+	//public List<List<Integer>> listOfBoardTiles = new ArrayList<List<Integer>>();
+	//List<String> x = new ArrayList<String>();
 
 	public BoardGenerator(int sizeOfBoard) {
 		this.sizeOfBoard = sizeOfBoard;
 		board = new Tile[sizeOfBoard][sizeOfBoard];
+		Messager.GetInstance().Subscribe(TouchDownMessage.class, new IAction(){
 
+			
+			public void Invoke(IMessage message) {
+				// TODO Auto-generated method stub
+				//placeTile((TouchDownMessage) message._pixelx,TouchDownMessage._pixely);
+				onTouchDownMessage((TouchDownMessage) message);
+			}
+			
+		});
+		
 	}
 
 	public void generateBoard() {
@@ -36,7 +40,7 @@ public class BoardGenerator {
 
 				board[i][j].setPixelPosition(new SimpleVector(
 						((float) i) * 32 * 1.666f,
-						120 + ((float) j) * 32 * 1.666f, 0));
+						120 + ((float) j) * 1.666f * 32, 0));
 
 			}
 
@@ -47,8 +51,23 @@ public class BoardGenerator {
 				(int) center), TileType.CENTER_TILE);
 
 		board[center][center].setPixelPosition(new SimpleVector(
-				(((float) center) * 32 * 1.666f),
-				120 + (((float) center) * 32 * 1.666f), 0));
+				(((float) center) * 1.666f * 32),
+				120 + (((float) center) * 1.666f * 32), 0));
+	}
+
+	public void onTouchDownMessage(TouchDownMessage message){
+		placeTile((int) (message._pixelx/(1.666*32)),(int) (message._pixely/(1.666*32)));
+	}
+	
+	public static void placeTile(int x, int y) {
+
+		board[y][x].Delete();
+		board[y][x] = new Tile(new BoardCoordinates((int) y, (int) x),
+				TileType.CENTER_TILE);
+		Log.d("Board Called",Integer.toString(x)+"  "+Integer.toString(y));
+		board[y][x].setPixelPosition(new SimpleVector(
+				(((float) y) * 1.666f * 32), 120 + (((float) x) * 1.666f * 32),
+				0));
 	}
 
 }

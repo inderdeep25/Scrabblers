@@ -1,5 +1,8 @@
 package com.threed.jpct.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.util.Log;
 
 import com.sprites.SimpleSpriteToken;
@@ -12,9 +15,9 @@ public class Tile {
 	TextSpriteToken letter;
 	TextSpriteToken number;
 	TextSpriteToken board;
-
+	LetterData _letterData;
 	float scale = 10;
-
+	TileType boardTile;
 	public Tile(BoardCoordinates x, TileType tileType) {
 		// background =
 		// SpriteManager.GetInstance().AddSimpleSprite("blank_tile_blueprint",
@@ -43,7 +46,7 @@ public class Tile {
 
 	public void placeLetter() {
 		// place background tile,tile points and letter.
-		//takes parameter of letter data.
+		// takes parameter of letter data.
 	}
 
 	public void setTileType(TileType tileType) {
@@ -54,37 +57,44 @@ public class Tile {
 		case BLANK_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"blankTile_blueprint", 0);
+			boardTile=TileType.BLANK_TILE;
 			Log.d("xy", "BlankTile");
 			break;
 		case NULL_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"blankTile_blueprint", 0);
+			boardTile=TileType.BLANK_TILE;
 			Log.d("xy", "nullTile");
 			break;
 
 		case TRIPPLE_LETTER_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"trippleLetterTile_blueprint", 0);
+			boardTile=TileType.TRIPPLE_LETTER_TILE;
 			Log.d("xy", "trippleLetterTile");
 			break;
 		case TRIPPLE_WORD_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"trippleWordTile_blueprint", 0);
+			boardTile=TileType.TRIPPLE_WORD_TILE;
 			Log.d("xy", "trippleWordTile");
 			break;
 		case DOUBLE_LETTER_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"doubleLetterTile_blueprint", 0);
+			boardTile=TileType.DOUBLE_LETTER_TILE;
 			Log.d("xy", "doubleLetterTile");
 			break;
 		case DOUBLE_WORD_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"doubleWordTile_blueprint", 0);
+			boardTile=TileType.DOUBLE_WORD_TILE;
 			Log.d("xy", "doubleWordTile");
 			break;
 		case CENTER_TILE:
 			background = SpriteManager.GetInstance().AddSimpleSprite(
 					"centerTile_blueprint", 0);
+			boardTile=TileType.CENTER_TILE;
 			Log.d("xy", "centerTile");
 			break;
 
