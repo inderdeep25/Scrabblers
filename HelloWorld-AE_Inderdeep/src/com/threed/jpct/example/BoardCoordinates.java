@@ -1,10 +1,18 @@
 package com.threed.jpct.example;
 
 public class BoardCoordinates {
-	public int x, y;
+	public static int x, y;
 
 	public BoardCoordinates(int x, int y) {
-		this.x = x;
-		this.y = y;
+		BoardCoordinates.x = x;
+		BoardCoordinates.y = y;
 	}
+	public static int getBoardX(){
+		return x;
+	}
+	public static int getBoardY(){
+		return y;
+	}
+	
+	
 }

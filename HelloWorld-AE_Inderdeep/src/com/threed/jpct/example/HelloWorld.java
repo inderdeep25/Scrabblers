@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.sprites.SimpleSpriteBlueprint;
@@ -71,7 +73,9 @@ public class HelloWorld extends Activity {
 		if (master != null) {
 			copy(master);
 		}
-
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		mGLView = new GLSurfaceView(getApplication());
 		setContentView(R.layout.main);
@@ -83,6 +87,7 @@ public class HelloWorld extends Activity {
 
 				Display display2 = getWindowManager().getDefaultDisplay();
 				Point size = new Point();
+				//int x=size.
 
 				int[] attributes = new int[] { EGL10.EGL_DEPTH_SIZE, 16,
 						EGL10.EGL_NONE };
@@ -134,7 +139,7 @@ public class HelloWorld extends Activity {
 		if (me.getAction() == MotionEvent.ACTION_DOWN) {
 			
 			Log.d("Worked","Touch detected");
-			Messager.GetInstance().Publish(new TouchDownMessage(me.getX(), me.getY()));
+			Messager.GetInstance().Publish(new TouchDownMessage((int) me.getX(),(int) me.getY()));
 			return true;
 		}
 
@@ -197,7 +202,7 @@ public class HelloWorld extends Activity {
 				 * TextureManager.getInstance().addTexture("board_tile_texture",
 				 * boardTileTexture);
 				 */
-				BoardGenerator ob = new BoardGenerator(9);
+				BoardGenerator ob = new BoardGenerator(15);
 				Texture blankTileTexture = new Texture(getResources()
 						.openRawResource(R.raw.blank), true);
 				blankTileTexture.setFiltering(false);
@@ -219,11 +224,11 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"blank_tile_blueprint",
 						new SimpleSpriteBlueprint("blank_tile_texture",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 				SpriteBlueprintProvider.GetInstance().AddTextSpriteBlueprint(
 						"alphabet_blueprint",
 						new TextSpriteBlueprint("A", "alphabet_atlas",
-								new SimpleVector(0, 0, 0), (float) 1.363f,
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale(),
 								new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G',
 										'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
 										'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
@@ -231,11 +236,11 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddTextSpriteBlueprint(
 						"number_blueprint",
 						new TextSpriteBlueprint("1", "number_atlas",
-								new SimpleVector(0, 0, 0), (float) 1.363f,
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale(),
 								new char[] { '1' }, 8, 8));
 
 				// TileAC ti = new TileAC(new
-				// SimpleVector(32*1.363f,120+32*1.363f,0),"A","1");
+				// SimpleVector(32*BoardGenerator.getScale(),120+32*BoardGenerator.getScale(),0),"A","1");
 
 				Texture blankTile = new Texture(getResources().openRawResource(
 						R.raw.blank_tile), true);
@@ -275,32 +280,32 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"blankTile_blueprint",
 						new SimpleSpriteBlueprint("blankTile",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"doubleLetterTile_blueprint",
 						new SimpleSpriteBlueprint("doubleLetterTile",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"trippleLetterTile_blueprint",
 						new SimpleSpriteBlueprint("trippleLetterTile",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"doubleWordTile_blueprint",
 						new SimpleSpriteBlueprint("doubleWordTile",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"trippleWordTile_blueprint",
 						new SimpleSpriteBlueprint("trippleWordTile",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"centerTile_blueprint",
 						new SimpleSpriteBlueprint("centerTile",
-								new SimpleVector(0, 0, 0), (float) 1.363f));
+								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
 				Log.d("TILE", "NO ERROR");
 				TileGenerator.AddTileTypeFrequency(TileType.BLANK_TILE, 10F);
 				TileGenerator.AddTileTypeFrequency(TileType.DOUBLE_LETTER_TILE,
@@ -318,7 +323,7 @@ public class HelloWorld extends Activity {
 
 				// Create a texture out of the icon...:-)
 				// Texture texture = new
-				// Texture(BitmapHelper.rescale(BitmapHelper.convert(getResources().getDrawable(R.drawable.icon)),
+				// Texture(BitmapHelper.regetScale()(BitmapHelper.convert(getResources().getDrawable(R.drawable.icon)),
 				// 64, 64));
 				// Manager obj =new Manager();
 				// x=obj.createBoard(9);
@@ -341,7 +346,7 @@ public class HelloWorld extends Activity {
 				 * /
 				 * /SpriteBlueprintProvider.GetInstance().AddtTextSpriteBlueprint
 				 * ("Alphabet", // new
-				 * TextSpriteBlueprint("text",texture,000,scale,char[]
+				 * TextSpriteBlueprint("text",texture,000,getScale(),char[]
 				 * aplhabet,width));
 				 */
 				/*
