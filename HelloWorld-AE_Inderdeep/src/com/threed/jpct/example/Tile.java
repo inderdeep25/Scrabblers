@@ -11,7 +11,7 @@ import com.sprites.TextSpriteToken;
 import com.threed.jpct.SimpleVector;
 
 public class Tile {
-	SimpleSpriteToken background;
+	SimpleSpriteToken background,backgroundLetter;
 	TextSpriteToken letter;
 	TextSpriteToken number;
 	TextSpriteToken board;
@@ -19,36 +19,44 @@ public class Tile {
 	float scale = 10;
 	TileType boardTile;
 	int count=0;
-	public Tile(BoardCoordinates x, TileType tileType) {
+	
+	public Tile(BoardCoordinates x, TileType tileType,LetterData _letterData) {
 		// background =
 		// SpriteManager.GetInstance().AddSimpleSprite("blank_tile_blueprint",
 		// 0);
+		if(_letterData==null)
 		setTileType(tileType);
-		letter = SpriteManager.GetInstance().AddTextSprite(
-				"alphabet_blueprint", 1);
-		number = SpriteManager.GetInstance().AddTextSprite("number_blueprint",
-				2);
 
-		letter.SetMessage("");
-		number.SetMessage("");
+		 //biege tile for the letter background
+		
+		boardTile=TileType.LETTER_TILE;
+		
+		if(_letterData !=null){
+			backgroundLetter=
+					 SpriteManager.GetInstance().AddSimpleSprite("blank_tile_blueprint",
+					 1);
+			letter = SpriteManager.GetInstance().AddTextSprite(
+					"alphabet_blueprint", 2);
+			number = SpriteManager.GetInstance().AddTextSprite("number_blueprint",
+					3);
+		letter.SetMessage(Character.toString(_letterData.get_id()));
+		number.SetMessage(Float.toString(_letterData.get_score()));
+		}
 		/*
 		 * background.SetScale(scale); letter.SetScale(scale);
 		 * number.SetScale(scale);
 		 */
-		// setPosition(x);
+		
 
 	}
 
 	public void Delete() {
 		background.Delete();
-		letter.Delete();
-		number.Delete();
+		//letter.Delete();
+		//number.Delete();
 	}
 
-	public void placeLetter() {
-		// place background tile,tile points and letter.
-		// takes parameter of letter data.
-	}
+	
 
 	public void setTileType(TileType tileType) {
 		if (background != null)
@@ -105,6 +113,11 @@ public class Tile {
 			boardTile=TileType.CENTER_TILE;
 			Log.d("xy", "centerTile");
 			break;
+		case LETTER_TILE:
+			break;
+		default:
+			break;
+		
 
 		}
 		background.SetScale(BoardGenerator.getScale());
@@ -112,14 +125,28 @@ public class Tile {
 
 	public void setPixelPosition(SimpleVector pos) {
 
-		SimpleVector letterdelta = new SimpleVector(3.0f * 1.363f,
-				3.0f * 1.363f, 0.0f);
+		//SimpleVector letterdelta = new SimpleVector(3.0f * BoardGenerator.getScale(),
+		//		3.0f * BoardGenerator.getScale(), 0.0f);
 		// letterdelta.scalarMul(scale);
-		SimpleVector numberdelta = new SimpleVector(20.0f * 1.363f,
-				20.0f * 1.363f, 0.0f);
+		//SimpleVector numberdelta = new SimpleVector(20.0f * BoardGenerator.getScale(),
+			//	20.0f * BoardGenerator.getScale(), 0.0f);
 		// numberdelta.scalarMul(scale);
 
 		background.SetPosition(pos);
+		//letter.SetPosition(pos.calcAdd(letterdelta));
+		//number.SetPosition(pos.calcAdd(numberdelta));
+
+	}
+	public void setLetterPosition(SimpleVector pos) {
+
+		SimpleVector letterdelta = new SimpleVector(3.0f * BoardGenerator.getScale(),
+				3.0f * BoardGenerator.getScale(), 0.0f);
+		// letterdelta.scalarMul(scale);
+		SimpleVector numberdelta = new SimpleVector(20.0f * BoardGenerator.getScale(),
+				20.0f * BoardGenerator.getScale(), 0.0f);
+		// numberdelta.scalarMul(scale);
+
+		backgroundLetter.SetPosition(pos);
 		letter.SetPosition(pos.calcAdd(letterdelta));
 		number.SetPosition(pos.calcAdd(numberdelta));
 

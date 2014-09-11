@@ -11,28 +11,39 @@ public class BoardGenerator {
 
 	public static int sizeOfBoard;
 	public static Tile[][] board, extend;
+	static int center;
 
 	// public List<List<Integer>> listOfBoardTiles = new
 	// ArrayList<List<Integer>>();
 	// List<String> x = new ArrayList<String>();
 
 	public static float scale;
-	public static int add;
+	public static int addFactor;
+
 	public static float getScale() {
-		//scale = 480 / (32 * sizeOfBoard);
-		scale=1;
-		//add=;
+		// scale = 480 / (32 * sizeOfBoard);
+		scale = ScreenInfoProvider.ScreenWidth / (32 * sizeOfBoard);
+		//scale=1.5f;
+		// add=;
 		return scale;
+	}
+
+	public static int returnAddFactor() {
+		addFactor = (int) ((int) ((center - 1) * 32 * getScale()) - (32 * getScale()));
+		//addFactor=240;
+		return addFactor;
 	}
 
 	public BoardGenerator(int sizeOfBoard) {
 		this.sizeOfBoard = sizeOfBoard;
+
 		board = new Tile[sizeOfBoard][sizeOfBoard];
+		center = (sizeOfBoard - 1) / 2;
 		Messager.GetInstance().Subscribe(TouchDownMessage.class, new IAction() {
 
 			public void Invoke(IMessage message) {
 				// TODO Auto-generated method stub
-				
+
 				onTouchDownMessage((TouchDownMessage) message);
 			}
 
@@ -47,34 +58,47 @@ public class BoardGenerator {
 
 				Log.d("In board:", "worked");
 				board[i][j] = new Tile(new BoardCoordinates(i, j),
-						TileGenerator.getRandomTileType());
+						TileGenerator.getRandomTileType(), null);
 
 				board[i][j].setPixelPosition(new SimpleVector(((float) i) * 32
-						* getScale(), 160+((float) j) * getScale() * 32, 0));
+						* getScale(),
+						returnAddFactor() + ((float) j) * getScale() * 32, 0));
 
 			}
 
 		}
-		int center = (sizeOfBoard - 1) / 2;
+
 		board[center][center].Delete();
 		board[center][center] = new Tile(new BoardCoordinates((int) center,
-				(int) center), TileType.CENTER_TILE);
+				(int) center), TileType.CENTER_TILE, null);
 
 		board[center][center].setPixelPosition(new SimpleVector(
-				(((float) center) * getScale() * 32), (160+((float) center)
-						* getScale() * 32), 0));
+				(((float) center) * getScale() * 32),
+				(returnAddFactor() + ((float) center) * getScale() * 32), 0));
 	}
 
 	public void onTouchDownMessage(TouchDownMessage message) {
 
-		//BoardCoordinates board_coor = new BoardCoordinates(Coordinates.getBoardX(),Coordinates.getBoardY());
 		
+		if ((int) message._pixely < returnAddFactor()) {
 
-		//placeTile(Coordinates.getBoardX(480, (int) message._pixelx),Coordinates.getBoardY(480, 800,Math.abs((int) message._pixely)));
-		//priyanka 
-		placeTile((int)ArrayCoord.ArrayCoordX((int) message._pixelx),(int)ArrayCoord.ArrayCoordY((int) message._pixely, 800,480));
-		//extendBoard();
-		Log.d("ArrayCoord",Float.toString(ArrayCoord.ArrayCoordX((int) message._pixelx))+Float.toString(ArrayCoord.ArrayCoordY((int) message._pixely, 800, 480)));
+		} else if ((int) message._pixely > (ScreenInfoProvider.ScreenHeight - returnAddFactor())) {
+
+		} else {
+			placeTile((int) ArrayCoord.ArrayCoordX((int) message._pixelx),
+					(int) ArrayCoord.ArrayCoordY((int) message._pixely,
+							ScreenInfoProvider.ScreenHeight,
+							ScreenInfoProvider.ScreenWidth));
+			
+			Log.d("ArrayCoord",
+					Float.toString(ArrayCoord
+							.ArrayCoordX((int) message._pixelx))
+							+ Float.toString(ArrayCoord.ArrayCoordY(
+									(int) message._pixely,
+									ScreenInfoProvider.ScreenHeight,
+									ScreenInfoProvider.ScreenWidth)));
+		}
+		
 	}
 
 	/*
@@ -111,15 +135,14 @@ public class BoardGenerator {
 	 * }
 	 */
 	public static void placeTile(int x, int y) {
-	//	x=y-2;
-		//y=x-2;
-		board[x][y].Delete();
-		board[x][y] = new Tile(new BoardCoordinates((int) x,
-				(int) y), TileType.CENTER_TILE);
 		
+		board[x][y] = new Tile(new BoardCoordinates((int) x, (int) y),
+				TileType.LETTER_TILE, new LetterData('S', 3, 0));
+
 		Log.d("Board Called", Integer.toString(x) + "  " + Integer.toString(y));
-		//board[x][y].setPixelPosition(new SimpleVector((float)a,(float)b,0));
-		board[x][y].setPixelPosition(new SimpleVector(((float) x)* getScale() * 32, (160+((float) y)* getScale() * 32), 0));
+		
+		board[x][y].setLetterPosition(new SimpleVector(((float) x) * getScale()
+				* 32, (returnAddFactor() + ((float) y) * getScale() * 32), 0));
 	}
 
 }

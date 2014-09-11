@@ -12,7 +12,7 @@ public class LetterData {
 		this.frequency=frequency;
 		this.score=score;
 	}
-	public int get_id() 
+	public char get_id() 
 	{
 		return this.id;
 	}

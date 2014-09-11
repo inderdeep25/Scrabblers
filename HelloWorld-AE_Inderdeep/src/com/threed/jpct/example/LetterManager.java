@@ -1,6 +1,7 @@
 package com.threed.jpct.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 
@@ -13,6 +14,11 @@ public class LetterManager {
 	     LetterData ob=new LetterData('a', 5, 2);
 	     float score=ob.get_score();
 	     return score;
+	}
+	
+	public static LetterData getRandomLetter(){
+		Collections.shuffle(list);
+		return list.get(2);
 	}
 	
 	public void Update_Placed_Letter(char ch)

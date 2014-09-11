@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -69,13 +70,19 @@ public class HelloWorld extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		Logger.log("onCreate");
-
+		
+		ScreenInfoProvider
+				.Initialize(
+						getWindowManager().getDefaultDisplay().getWidth(),
+						getWindowManager().getDefaultDisplay().getHeight());
+						//
+						//
 		if (master != null) {
 			copy(master);
 		}
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		super.onCreate(savedInstanceState);
 		mGLView = new GLSurfaceView(getApplication());
 		setContentView(R.layout.main);
@@ -87,7 +94,7 @@ public class HelloWorld extends Activity {
 
 				Display display2 = getWindowManager().getDefaultDisplay();
 				Point size = new Point();
-				//int x=size.
+				// int x=size.
 
 				int[] attributes = new int[] { EGL10.EGL_DEPTH_SIZE, 16,
 						EGL10.EGL_NONE };
@@ -137,15 +144,17 @@ public class HelloWorld extends Activity {
 	public boolean onTouchEvent(final MotionEvent me) {
 
 		if (me.getAction() == MotionEvent.ACTION_DOWN) {
-			
-			Log.d("Worked","Touch detected");
-			Messager.GetInstance().Publish(new TouchDownMessage((int) me.getX(),(int) me.getY()));
+
+			Log.d("Worked", "Touch detected");
+			Messager.GetInstance().Publish(
+					new TouchDownMessage((int) me.getX(), (int) me.getY()));
 			return true;
 		}
 
 		if (me.getAction() == MotionEvent.ACTION_UP) {
-			
-			Messager.GetInstance().Publish(new TouchUpMessage(me.getX(),me.getY()));
+
+			Messager.GetInstance().Publish(
+					new TouchUpMessage(me.getX(), me.getY()));
 			return true;
 		}
 
@@ -216,7 +225,7 @@ public class HelloWorld extends Activity {
 						alphabetAtlasTexture);
 
 				Texture numberAtlasTexture = new Texture(getResources()
-						.openRawResource(R.raw.num1), true);
+						.openRawResource(R.raw.numbers), true);
 				numberAtlasTexture.setFiltering(false);
 				TextureManager.getInstance().addTexture("number_atlas",
 						numberAtlasTexture);
@@ -224,20 +233,24 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"blank_tile_blueprint",
 						new SimpleSpriteBlueprint("blank_tile_texture",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 				SpriteBlueprintProvider.GetInstance().AddTextSpriteBlueprint(
 						"alphabet_blueprint",
 						new TextSpriteBlueprint("A", "alphabet_atlas",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale(),
-								new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G',
-										'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
-										'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
-										'X', 'Y', 'Z' }, 16, 16));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale(), new char[] {
+										'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+										'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+										'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+										'Y', 'Z' }, 16, 16));
 				SpriteBlueprintProvider.GetInstance().AddTextSpriteBlueprint(
 						"number_blueprint",
 						new TextSpriteBlueprint("1", "number_atlas",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale(),
-								new char[] { '1' }, 8, 8));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale(), new char[] {
+										'0', '1', '2', '3', '4', '5', '6', '7',
+										'8', '9' }, 8, 8));
 
 				// TileAC ti = new TileAC(new
 				// SimpleVector(32*BoardGenerator.getScale(),120+32*BoardGenerator.getScale(),0),"A","1");
@@ -280,32 +293,38 @@ public class HelloWorld extends Activity {
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"blankTile_blueprint",
 						new SimpleSpriteBlueprint("blankTile",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"doubleLetterTile_blueprint",
 						new SimpleSpriteBlueprint("doubleLetterTile",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"trippleLetterTile_blueprint",
 						new SimpleSpriteBlueprint("trippleLetterTile",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"doubleWordTile_blueprint",
 						new SimpleSpriteBlueprint("doubleWordTile",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"trippleWordTile_blueprint",
 						new SimpleSpriteBlueprint("trippleWordTile",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 
 				SpriteBlueprintProvider.GetInstance().AddSimpleSpriteBlueprint(
 						"centerTile_blueprint",
 						new SimpleSpriteBlueprint("centerTile",
-								new SimpleVector(0, 0, 0), (float) BoardGenerator.getScale()));
+								new SimpleVector(0, 0, 0),
+								(float) BoardGenerator.getScale()));
 				Log.d("TILE", "NO ERROR");
 				TileGenerator.AddTileTypeFrequency(TileType.BLANK_TILE, 10F);
 				TileGenerator.AddTileTypeFrequency(TileType.DOUBLE_LETTER_TILE,
@@ -330,7 +349,7 @@ public class HelloWorld extends Activity {
 
 				Log.d("chl ja yar", "plzzz");
 				ob.generateBoard();
-				//ob.extendBoard();
+				// ob.extendBoard();
 				// ob.setTile(new BoardCoordinates(2, 3));
 				// ob.setTile(new BoardCoordinates(3, 3));
 				// ob.setTile(new BoardCoordinates(4, 3));
@@ -377,9 +396,11 @@ public class HelloWorld extends Activity {
 
 		public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 		}
-		public void update(){
-			Messager.GetInstance().Update(1/60);
+
+		public void update() {
+			Messager.GetInstance().Update(1 / 60);
 		}
+
 		public void onDrawFrame(GL10 gl) {
 			if (touchTurn != 0) {
 				// cube.rotateY(touchTurn);
